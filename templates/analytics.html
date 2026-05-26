@@ -1,0 +1,153 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Analytics{% endblock %}
+
+{% block content %}
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Analytics</p>
+      <h1>Wildfire Intelligence Analytics</h1>
+    </div>
+    <div class="actions">
+      <button class="ghost-btn">Download Report</button>
+      <button class="primary-btn">Share Summary</button>
+    </div>
+  </header>
+
+  <section class="grid three-col">
+    <div class="card kpi-card">
+      <p class="caption">Active incidents</p>
+      <div class="kpi-value">58</div>
+      <p class="muted">+12% week-over-week</p>
+    </div>
+    <div class="card kpi-card">
+      <p class="caption">Forecast accuracy</p>
+      <div class="kpi-value">92.4%</div>
+      <p class="muted">Model stability index</p>
+    </div>
+    <div class="card kpi-card">
+      <p class="caption">Avg response time</p>
+      <div class="kpi-value">14 min</div>
+      <p class="muted">Operational SLA</p>
+    </div>
+  </section>
+
+  <section class="grid two-col">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>Historical Wildfire Trends</h3>
+          <p class="muted">Incidents vs containment rate</p>
+        </div>
+      </div>
+      <canvas id="wildfireTrendChart"></canvas>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>Risk Forecasting</h3>
+          <p class="muted">14-day risk outlook</p>
+        </div>
+      </div>
+      <canvas id="riskForecastChart"></canvas>
+    </div>
+  </section>
+
+  <section class="grid two-col">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>Weather Correlations</h3>
+          <p class="muted">Humidity, wind, temperature</p>
+        </div>
+      </div>
+      <canvas id="weatherCorrelationChart"></canvas>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>Regional Comparisons</h3>
+          <p class="muted">Risk by operational region</p>
+        </div>
+      </div>
+      <canvas id="regionalComparisonChart"></canvas>
+    </div>
+  </section>
+
+  <section class="grid three-col">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>Feature Importance</h3>
+          <p class="muted">Top drivers of risk</p>
+        </div>
+      </div>
+      <canvas id="analyticsFeatureChart"></canvas>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>Anomaly Detection</h3>
+          <p class="muted">Outlier risk spikes</p>
+        </div>
+      </div>
+      <canvas id="anomalyChart"></canvas>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>Operational KPIs</h3>
+          <p class="muted">Response readiness</p>
+        </div>
+      </div>
+      <div class="status-list">
+        <div class="status-item">
+          <span>Response teams</span>
+          <strong>68%</strong>
+        </div>
+        <div class="status-item">
+          <span>Sensor uptime</span>
+          <strong>99%</strong>
+        </div>
+        <div class="status-item">
+          <span>Active alerts</span>
+          <strong>41</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid two-col">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>AI Performance Metrics</h3>
+          <p class="muted">Precision, recall, drift</p>
+        </div>
+      </div>
+      <canvas id="performanceChart"></canvas>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>AI Insights</h3>
+          <p class="muted">Executive summary</p>
+        </div>
+      </div>
+      <div class="insights-panel" id="insightsPanel">
+        <div class="insight-item">
+          <strong>Risk escalation</strong>
+          <p>Southwest corridor shows a 19% surge in risk tied to humidity drops.</p>
+        </div>
+        <div class="insight-item">
+          <strong>Operational strain</strong>
+          <p>Response capacity below 70% in two regions. Recommend redeployment.</p>
+        </div>
+        <div class="insight-item">
+          <strong>Model drift</strong>
+          <p>Feature distribution change detected in coastal zones. Retrain advised.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

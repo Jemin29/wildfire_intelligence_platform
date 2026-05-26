@@ -1,0 +1,167 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Predictions{% endblock %}
+
+{% block content %}
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Predictions</p>
+      <h1>Wildfire Prediction Console</h1>
+    </div>
+    <div class="actions">
+      <button class="ghost-btn">History</button>
+      <button class="primary-btn">Run Batch</button>
+    </div>
+  </header>
+
+  <section class="grid two-col">
+    <div class="card prediction-card prediction-console">
+      <div class="card-header">
+        <div>
+          <h3>On-demand Prediction</h3>
+          <p class="muted">Submit conditions to receive risk</p>
+        </div>
+        <span class="pill">API</span>
+      </div>
+      <form id="predictionForm">
+        <div class="form-grid">
+          <label>
+            Region
+            <select name="region" id="regionSelect" required>
+              <option value="sierra">Sierra Corridor</option>
+              <option value="central">Central Basin</option>
+              <option value="coastal">Coastal Ridge</option>
+              <option value="desert">Desert Edge</option>
+            </select>
+          </label>
+          <label>
+            Scenario
+            <select name="scenario" id="scenarioSelect" required>
+              <option value="now">Real-time</option>
+              <option value="12h">12 hours ahead</option>
+              <option value="24h">24 hours ahead</option>
+            </select>
+          </label>
+          <label>
+            Temperature (C)
+            <input type="number" name="temperature" step="0.1" required />
+          </label>
+          <label>
+            Humidity (%)
+            <input type="number" name="humidity" step="0.1" required />
+          </label>
+          <label>
+            Rainfall (mm)
+            <input type="number" name="rainfall" step="0.1" required />
+          </label>
+          <label>
+            Wind Speed (m/s)
+            <input type="number" name="wind_speed" step="0.1" required />
+          </label>
+          <label>
+            Vegetation (0-1)
+            <input type="number" name="vegetation" step="0.01" required />
+          </label>
+          <label>
+            Soil Moisture (0-1)
+            <input type="number" name="soil_moisture" step="0.01" required />
+          </label>
+        </div>
+        <div class="form-grid">
+          <label>
+            Confidence Threshold
+            <input type="range" name="confidence" min="0.5" max="0.99" step="0.01" value="0.75" />
+          </label>
+          <label>
+            Notes
+            <input type="text" name="notes" placeholder="Optional context" />
+          </label>
+        </div>
+        <button class="primary-btn" type="submit">Run Prediction</button>
+      </form>
+    </div>
+
+    <div class="card prediction-output">
+      <div class="card-header">
+        <div>
+          <h3>Prediction Output</h3>
+          <p class="muted">Latest model response</p>
+        </div>
+        <span class="pill">Live</span>
+      </div>
+      <div class="prediction-result" id="predictionResult">
+        <p class="caption">Risk classification</p>
+        <div class="result-value" id="predictionLabel">--</div>
+        <p class="muted" id="predictionMeta">Submit a sample to view risk.</p>
+      </div>
+      <div class="output-grid">
+        <div class="output-card">
+          <span class="muted">Probability</span>
+          <strong id="probabilityValue">--</strong>
+          <div class="gauge">
+            <span id="probabilityGauge" style="width: 0%"></span>
+          </div>
+        </div>
+        <div class="output-card">
+          <span class="muted">AI confidence</span>
+          <strong id="confidenceValue">--</strong>
+          <div class="gauge">
+            <span id="confidenceGauge" style="width: 0%"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid two-col">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>Prediction Timeline</h3>
+          <p class="muted">Risk projection over time</p>
+        </div>
+      </div>
+      <canvas id="predictionTrendChart"></canvas>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>Feature Importance</h3>
+          <p class="muted">Drivers influencing the score</p>
+        </div>
+      </div>
+      <canvas id="predictionImportanceChart"></canvas>
+    </div>
+  </section>
+
+  <section class="grid two-col">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>Prediction History</h3>
+          <p class="muted">Recent model calls</p>
+        </div>
+      </div>
+      <div class="history-list" id="predictionHistory"></div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>Model Explanation</h3>
+          <p class="muted">How the AI reached this output</p>
+        </div>
+      </div>
+      <div class="explanation" id="predictionExplanation">
+        <p>
+          The model weighs atmospheric dryness, wind acceleration, and vegetation stress to
+          determine ignition risk. Feature contributions update in real-time with each input.
+        </p>
+        <div class="chip-row">
+          <span class="chip">Wind Surge</span>
+          <span class="chip">Low Humidity</span>
+          <span class="chip">Vegetation Stress</span>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

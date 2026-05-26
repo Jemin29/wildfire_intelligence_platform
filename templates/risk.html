@@ -1,0 +1,118 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Risk Monitor{% endblock %}
+
+{% block content %}
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Risk Monitoring</p>
+      <h1>Real-Time Wildfire Surveillance</h1>
+    </div>
+    <div class="actions">
+      <button class="ghost-btn">Export</button>
+      <button class="primary-btn">Update Layers</button>
+    </div>
+  </header>
+
+  <section class="grid three-col">
+    <div class="card risk-summary">
+      <p class="caption">Live AI risk index</p>
+      <div class="risk-score-large" id="riskIndex">78</div>
+      <p class="muted">National composite risk</p>
+      <div class="risk-indicator critical">Critical</div>
+    </div>
+    <div class="card risk-summary">
+      <p class="caption">Active alerts</p>
+      <div class="risk-score-large" id="activeAlerts">12</div>
+      <p class="muted">High priority escalations</p>
+      <div class="risk-indicator high">High</div>
+    </div>
+    <div class="card risk-summary">
+      <p class="caption">AI anomaly score</p>
+      <div class="risk-score-large" id="anomalyScore">0.67</div>
+      <p class="muted">Pattern deviation detected</p>
+      <div class="risk-indicator moderate">Moderate</div>
+    </div>
+  </section>
+
+  <section class="grid risk-card-grid" id="riskCards"></section>
+
+  <section class="grid two-col">
+    <div class="card map-card">
+      <div class="card-header">
+        <div>
+          <h3>Regional Risk Map</h3>
+          <p class="muted">Risk heat + perimeter overlays</p>
+        </div>
+        <button class="ghost-btn">Layers</button>
+      </div>
+      <iframe
+        class="folium-frame"
+        title="Wildfire risk map"
+        src="/map/wildfire"
+        loading="lazy"
+      ></iframe>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>Priority Zones</h3>
+          <p class="muted">Operational focus for next 72 hours</p>
+        </div>
+      </div>
+      <div class="status-list" id="priorityZones"></div>
+    </div>
+  </section>
+
+  <section class="grid three-col">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>Active Alerts</h3>
+          <p class="muted">Triggered escalations</p>
+        </div>
+        <span class="pill">Live</span>
+      </div>
+      <div class="alert-list" id="alertList"></div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>Incident Tracking</h3>
+          <p class="muted">Live wildfire events</p>
+        </div>
+      </div>
+      <div class="incident-list" id="incidentList"></div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>Operational Metrics</h3>
+          <p class="muted">Readiness + deployment</p>
+        </div>
+      </div>
+      <div class="metric-grid" id="opsMetrics"></div>
+    </div>
+  </section>
+
+  <section class="grid two-col">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>Status Timeline</h3>
+          <p class="muted">Last 24 hours</p>
+        </div>
+      </div>
+      <div class="timeline" id="statusTimeline"></div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>Risk Heat Indicators</h3>
+          <p class="muted">Micro-region heat index</p>
+        </div>
+      </div>
+      <div class="heat-grid" id="heatIndicators"></div>
+    </div>
+  </section>
+{% endblock %}

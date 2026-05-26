@@ -1,0 +1,209 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Wildfire Intelligence Platform{% endblock %}
+
+{% block content %}
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">AI-Powered Wildfire Intelligence Platform</p>
+      <h1>Operational Dashboard</h1>
+    </div>
+    <div class="actions">
+      <button class="ghost-btn">Export</button>
+      <button class="primary-btn">New Alert</button>
+    </div>
+  </header>
+
+  <section class="grid">
+    <div class="card hero">
+      <div>
+        <p class="caption">National risk outlook</p>
+        <h2 class="hero-title">Critical pockets building across the southwest.</h2>
+        <p class="muted">
+          Forecasted risk +14% week-over-week. Prioritize resources in high wind corridors.
+        </p>
+        <div class="hero-actions">
+          <button class="primary-btn">Generate Action Plan</button>
+          <button class="ghost-btn">View briefing</button>
+        </div>
+      </div>
+      <div class="hero-metric">
+        <p class="caption">Composite Risk Index</p>
+        <div class="risk-score">82</div>
+        <p class="muted">Extreme</p>
+      </div>
+    </div>
+
+    <div class="card risk-card">
+      <p class="caption">Northern Range</p>
+      <h3>High</h3>
+      <p class="muted">Wind + low humidity</p>
+      <div class="risk-trend up">+8%</div>
+    </div>
+    <div class="card risk-card">
+      <p class="caption">Central Basin</p>
+      <h3>Moderate</h3>
+      <p class="muted">Recent rain impact</p>
+      <div class="risk-trend down">-3%</div>
+    </div>
+    <div class="card risk-card">
+      <p class="caption">Coastal Ridge</p>
+      <h3>Critical</h3>
+      <p class="muted">Dry fuels + heat</p>
+      <div class="risk-trend up">+12%</div>
+    </div>
+  </section>
+
+  <section class="grid two-col">
+    <div class="card map-card">
+      <div class="card-header">
+        <div>
+          <h3>Risk Map</h3>
+          <p class="muted">Live risk layering from weather + vegetation</p>
+        </div>
+        <button class="ghost-btn">Layers</button>
+      </div>
+      <iframe
+        class="folium-frame"
+        title="Wildfire risk map"
+        src="/map/wildfire"
+        loading="lazy"
+      ></iframe>
+    </div>
+    <div class="card chart-card">
+      <div class="card-header">
+        <div>
+          <h3>Risk Trend</h3>
+          <p class="muted">14-day forecast vs historical baseline</p>
+        </div>
+        <span class="pill">Forecast</span>
+      </div>
+      <canvas id="riskTrendChart"></canvas>
+    </div>
+  </section>
+
+  <section class="grid three-col">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>Top Drivers</h3>
+          <p class="muted">Feature importance snapshot</p>
+        </div>
+      </div>
+      <canvas id="featureChart"></canvas>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>Alert Volume</h3>
+          <p class="muted">Recent escalation trend</p>
+        </div>
+      </div>
+      <canvas id="alertChart"></canvas>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>Operational Status</h3>
+          <p class="muted">Response readiness</p>
+        </div>
+      </div>
+      <div class="status-list">
+        <div class="status-item">
+          <span>Drone coverage</span>
+          <strong>92%</strong>
+        </div>
+        <div class="status-item">
+          <span>Ground teams</span>
+          <strong>68%</strong>
+        </div>
+        <div class="status-item">
+          <span>Sensor uptime</span>
+          <strong>99%</strong>
+        </div>
+        <div class="status-item">
+          <span>Early alerts</span>
+          <strong>41</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid two-col">
+    <div class="card prediction-card">
+      <div class="card-header">
+        <div>
+          <h3>Prediction Console</h3>
+          <p class="muted">Run on-demand wildfire risk prediction</p>
+        </div>
+        <span class="pill">API</span>
+      </div>
+      <form id="predictionForm">
+        <div class="form-grid">
+          <label>
+            Temperature (C)
+            <input type="number" name="temperature" step="0.1" required />
+          </label>
+          <label>
+            Humidity (%)
+            <input type="number" name="humidity" step="0.1" required />
+          </label>
+          <label>
+            Rainfall (mm)
+            <input type="number" name="rainfall" step="0.1" required />
+          </label>
+          <label>
+            Wind Speed (m/s)
+            <input type="number" name="wind_speed" step="0.1" required />
+          </label>
+          <label>
+            Vegetation (0-1)
+            <input type="number" name="vegetation" step="0.01" required />
+          </label>
+          <label>
+            Soil Moisture (0-1)
+            <input type="number" name="soil_moisture" step="0.01" required />
+          </label>
+        </div>
+        <button class="primary-btn" type="submit">Run Prediction</button>
+      </form>
+      <div class="prediction-result" id="predictionResult">
+        <p class="caption">Latest result</p>
+        <div class="result-value">--</div>
+        <p class="muted" id="predictionMeta">Submit a sample to view risk.</p>
+      </div>
+    </div>
+
+    <div class="card weather-card">
+      <div class="card-header">
+        <div>
+          <h3>Weather Pulse</h3>
+          <p class="muted">Live conditions pulled from API</p>
+        </div>
+        <button id="refreshWeather" class="ghost-btn">Refresh</button>
+      </div>
+      <div class="weather-grid" id="weatherGrid">
+        <div class="weather-item">
+          <span>Temperature</span>
+          <strong>--</strong>
+        </div>
+        <div class="weather-item">
+          <span>Humidity</span>
+          <strong>--</strong>
+        </div>
+        <div class="weather-item">
+          <span>Wind Speed</span>
+          <strong>--</strong>
+        </div>
+        <div class="weather-item">
+          <span>Rainfall</span>
+          <strong>--</strong>
+        </div>
+      </div>
+      <div class="weather-footer">
+        <p class="caption">Data source</p>
+        <p class="muted" id="weatherSource">Awaiting refresh</p>
+      </div>
+    </div>
+  </section>
+{% endblock %}

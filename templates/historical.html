@@ -1,0 +1,138 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Historical Wildfire Intelligence{% endblock %}
+
+{% block content %}
+<div class="content-header">
+    <h1 class="page-title">Historical Wildfire Intelligence</h1>
+    <p class="page-subtitle">Analyze trends, patterns, and anomalies from past wildfire seasons.</p>
+</div>
+
+<!-- Filter Bar -->
+<div class="filter-bar">
+    <div class="filter-group">
+        <label for="region-filter"><i class="fas fa-globe-americas"></i> Region</label>
+        <select id="region-filter">
+            <option value="all">All Regions</option>
+            <option value="california">California</option>
+            <option value="pacific_northwest">Pacific Northwest</option>
+            <option value="southwest">Southwest</option>
+            <option value="rockies">Rockies</option>
+            <option value="australia">Australia</option>
+        </select>
+    </div>
+    <div class="filter-group">
+        <label for="year-range-filter"><i class="fas fa-calendar-alt"></i> Year Range</label>
+        <select id="year-range-filter">
+            <option value="5">Last 5 Years</option>
+            <option value="10">Last 10 Years</option>
+            <option value="20">Last 20 Years</option>
+            <option value="all">All Time</option>
+        </select>
+    </div>
+    <div class="filter-group">
+        <label for="data-metric-filter"><i class="fas fa-chart-line"></i> Primary Metric</label>
+        <select id="data-metric-filter">
+            <option value="acres_burned">Acres Burned</option>
+            <option value="incident_count">Incident Count</option>
+            <option value="structures_lost">Structures Lost</option>
+            <option value="cost">Estimated Cost</option>
+        </select>
+    </div>
+    <button id="apply-filters-btn" class="btn btn-primary"><i class="fas fa-filter"></i> Apply Filters</button>
+</div>
+
+<!-- KPIs Grid -->
+<div class="grid four-col kpi-grid">
+    <div class="card kpi-card">
+        <div class="card-body">
+            <div class="kpi-icon"><i class="fas fa-fire-alt"></i></div>
+            <div class="kpi-value" id="kpi-total-incidents">--</div>
+            <div class="kpi-label">Total Incidents</div>
+        </div>
+    </div>
+    <div class="card kpi-card">
+        <div class="card-body">
+            <div class="kpi-icon"><i class="fas fa-chart-area"></i></div>
+            <div class="kpi-value" id="kpi-total-acres">--</div>
+            <div class="kpi-label">Total Acres Burned</div>
+        </div>
+    </div>
+    <div class="card kpi-card">
+        <div class="card-body">
+            <div class="kpi-icon"><i class="fas fa-home"></i></div>
+            <div class="kpi-value" id="kpi-total-structures">--</div>
+            <div class="kpi-label">Structures Lost</div>
+        </div>
+    </div>
+    <div class="card kpi-card">
+        <div class="card-body">
+            <div class="kpi-icon"><i class="fas fa-dollar-sign"></i></div>
+            <div class="kpi-value" id="kpi-total-cost">--</div>
+            <div class="kpi-label">Est. Financial Impact</div>
+        </div>
+    </div>
+</div>
+
+<!-- Main Chart Grid -->
+<div class="grid two-col">
+    <div class="card chart-card">
+        <div class="card-header">
+            <h3>Yearly Wildfire Trends</h3>
+            <p>Comparison of key metrics over the selected time range.</p>
+        </div>
+        <div class="card-body">
+            <canvas id="yearlyTrendsChart"></canvas>
+        </div>
+    </div>
+    <div class="card chart-card">
+        <div class="card-header">
+            <h3>Seasonal Pattern Analysis</h3>
+            <p>Monthly distribution of wildfire activity.</p>
+        </div>
+        <div class="card-body">
+            <canvas id="seasonalPatternsChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<div class="grid">
+    <div class="card chart-card full-width">
+        <div class="card-header">
+            <h3>Historical Hotspot Map</h3>
+            <p>Geographical distribution of wildfire incidents over time.</p>
+        </div>
+        <div class="card-body">
+            <!-- Placeholder for a map visualization. For now, we'll use a chart. -->
+            <canvas id="historicalHeatmapChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<div class="grid two-col">
+    <div class="card chart-card">
+        <div class="card-header">
+            <h3>Top 5 Most Impacted Regions</h3>
+            <p>Regions with the highest incident counts in the selected period.</p>
+        </div>
+        <div class="card-body">
+            <canvas id="regionWiseHistoryChart"></canvas>
+        </div>
+    </div>
+    <div class="card chart-card">
+        <div class="card-header">
+            <h3>Historical Risk Forecasting Accuracy</h3>
+            <p>Comparing past predictions with actual outcomes.</p>
+        </div>
+        <div class="card-body">
+            <canvas id="historicalRiskForecastChart"></canvas>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+<script type="module" src="{{ url_for('static', filename='js/historical.js') }}"></script>
+{% endblock %}

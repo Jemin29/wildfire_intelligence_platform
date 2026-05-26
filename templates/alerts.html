@@ -1,0 +1,168 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Alerts Center{% endblock %}
+
+{% block content %}
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Alerts Center</p>
+      <h1>Emergency Operations Intelligence</h1>
+      <div class="meta-row">
+        <span class="meta-chip" id="alertRegion">Multi-region coverage</span>
+        <span class="meta-chip" id="alertStatus">Status: Monitoring</span>
+        <span class="meta-chip" id="alertSync">Last sync --</span>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="ghost-btn">Export Log</button>
+      <button class="primary-btn">Acknowledge All</button>
+    </div>
+  </header>
+
+  <section class="grid four-col">
+    <div class="card kpi-card">
+      <p class="caption">Critical alerts</p>
+      <div class="kpi-value" id="criticalCount">6</div>
+      <p class="muted">Require immediate response</p>
+    </div>
+    <div class="card kpi-card">
+      <p class="caption">Active incidents</p>
+      <div class="kpi-value" id="activeIncidents">14</div>
+      <p class="muted">Live field activity</p>
+    </div>
+    <div class="card kpi-card">
+      <p class="caption">Escalations</p>
+      <div class="kpi-value" id="escalationCount">9</div>
+      <p class="muted">On-call teams engaged</p>
+    </div>
+    <div class="card kpi-card">
+      <p class="caption">Response SLA</p>
+      <div class="kpi-value" id="responseSla">12 min</div>
+      <p class="muted">Median response window</p>
+    </div>
+  </section>
+
+  <section class="card alert-filter-card">
+    <div class="alert-filter-row">
+      <div class="alert-search">
+        <label for="alertSearch" class="muted">Search alerts</label>
+        <input id="alertSearch" type="text" placeholder="Search by region, alert, or unit" />
+      </div>
+      <div class="alert-severity" id="severityFilters">
+        <button class="filter-chip active" data-severity="all">All</button>
+        <button class="filter-chip" data-severity="critical">Critical</button>
+        <button class="filter-chip" data-severity="high">High</button>
+        <button class="filter-chip" data-severity="moderate">Moderate</button>
+        <button class="filter-chip" data-severity="low">Low</button>
+      </div>
+      <div class="alert-toggle">
+        <label class="filter-chip">
+          <input type="checkbox" id="showActiveOnly" checked />
+          Active only
+        </label>
+        <label class="filter-chip">
+          <input type="checkbox" id="showEscalated" />
+          Escalated
+        </label>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid three-col">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>Critical Alerts</h3>
+          <p class="muted">Prioritized incidents requiring action</p>
+        </div>
+        <span class="pill">Live</span>
+      </div>
+      <div class="alert-card-list" id="alertCards"></div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>Active Incidents</h3>
+          <p class="muted">Field activity and containment</p>
+        </div>
+      </div>
+      <div class="incident-list" id="incidentFeed"></div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>Notification Center</h3>
+          <p class="muted">Broadcasts and acknowledgements</p>
+        </div>
+      </div>
+      <div class="notification-list" id="notificationCenter"></div>
+    </div>
+  </section>
+
+  <section class="grid two-col">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>Alert Timeline</h3>
+          <p class="muted">Live escalation and response events</p>
+        </div>
+      </div>
+      <div class="timeline" id="alertTimeline"></div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>AI Recommendations</h3>
+          <p class="muted">Model-generated next best actions</p>
+        </div>
+      </div>
+      <div class="recommendation-list" id="aiRecommendations"></div>
+    </div>
+  </section>
+
+  <section class="grid two-col">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>Escalation Workflow</h3>
+          <p class="muted">From detection to dispatch</p>
+        </div>
+      </div>
+      <div class="workflow-list" id="escalationWorkflow"></div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>Emergency Response Panel</h3>
+          <p class="muted">Operational readiness and resource status</p>
+        </div>
+      </div>
+      <div class="response-panel" id="responsePanel"></div>
+    </div>
+  </section>
+
+  <section class="grid two-col">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>Alert History</h3>
+          <p class="muted">Recent acknowledgements and resolutions</p>
+        </div>
+      </div>
+      <div class="history-list" id="alertHistory"></div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>Operational Response Status</h3>
+          <p class="muted">Command readiness summary</p>
+        </div>
+      </div>
+      <div class="status-list" id="responseStatus"></div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block scripts %}
+  <script src="/static/js/alerts.js"></script>
+{% endblock %}

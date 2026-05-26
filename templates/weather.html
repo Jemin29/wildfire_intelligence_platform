@@ -1,0 +1,191 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Weather{% endblock %}
+
+{% block content %}
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Weather Intelligence</p>
+      <h1>Atmospheric Risk Intelligence</h1>
+      <div class="meta-row">
+        <span class="meta-chip" id="locationLabel">Los Angeles, CA</span>
+        <span class="meta-chip" id="lastUpdated">Last updated --</span>
+        <span class="meta-chip status" id="updateStatus">Live</span>
+      </div>
+    </div>
+    <div class="actions">
+      <div class="location-picker" id="locationPicker">
+        <button class="ghost-btn location-chip" data-weather-location="34.05,-118.25,Los Angeles, CA">Los Angeles</button>
+        <button class="ghost-btn location-chip" data-weather-location="37.77,-122.42,San Francisco, CA">San Francisco</button>
+        <button class="ghost-btn location-chip" data-weather-location="40.71,-74.01,New York, NY">New York</button>
+      </div>
+      <button id="refreshWeather" class="ghost-btn">Refresh</button>
+      <button class="primary-btn">Export</button>
+    </div>
+  </header>
+
+  <section class="grid four-col">
+    <div class="card weather-kpi">
+      <p class="caption">Wildfire weather index</p>
+      <div class="kpi-value" id="weatherIndex">--</div>
+      <p class="muted" id="weatherIndexMeta">Awaiting live update</p>
+    </div>
+    <div class="card weather-kpi">
+      <p class="caption">Humidity stress</p>
+      <div class="kpi-value" id="humidityStress">--</div>
+      <p class="muted" id="humidityMeta">Monitoring moisture bands</p>
+    </div>
+    <div class="card weather-kpi">
+      <p class="caption">Wind surge</p>
+      <div class="kpi-value" id="windSurge">--</div>
+      <p class="muted" id="windMeta">Awaiting gust profile</p>
+    </div>
+    <div class="card weather-kpi">
+      <p class="caption">Drought conditions</p>
+      <div class="kpi-value" id="droughtIndex">--</div>
+      <p class="muted" id="droughtMeta">Soil dryness outlook</p>
+    </div>
+  </section>
+
+  <section class="grid two-col">
+    <div class="card weather-card">
+      <div class="card-header">
+        <div>
+          <h3>Current Conditions</h3>
+          <p class="muted">Live readings from weather API</p>
+        </div>
+        <span class="pill">Live</span>
+      </div>
+      <div class="weather-grid" id="weatherGrid">
+        <div class="weather-item">
+          <span>Temperature</span>
+          <strong>--</strong>
+        </div>
+        <div class="weather-item">
+          <span>Humidity</span>
+          <strong>--</strong>
+        </div>
+        <div class="weather-item">
+          <span>Wind Speed</span>
+          <strong>--</strong>
+        </div>
+        <div class="weather-item">
+          <span>Rainfall</span>
+          <strong>--</strong>
+        </div>
+      </div>
+      <div class="weather-footer">
+        <p class="caption">Data source</p>
+        <p class="muted" id="weatherSource">Awaiting refresh</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>7-Day Forecast</h3>
+          <p class="muted">Projected weather volatility</p>
+        </div>
+      </div>
+      <div class="forecast-grid" id="forecastGrid"></div>
+    </div>
+  </section>
+
+  <section class="grid three-col">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>Live Weather Widgets</h3>
+          <p class="muted">Operational readings for incident teams</p>
+        </div>
+        <span class="pill">Widgets</span>
+      </div>
+      <div class="widget-grid" id="liveWidgets"></div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>Wildfire Weather Indicators</h3>
+          <p class="muted">Ignition drivers and suppression outlook</p>
+        </div>
+      </div>
+      <div class="indicator-list" id="wildfireIndicators"></div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>Atmospheric Risk Factors</h3>
+          <p class="muted">Composite risk driver balance</p>
+        </div>
+      </div>
+      <canvas id="riskFactorChart"></canvas>
+    </div>
+  </section>
+
+  <section class="grid two-col">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>Humidity Analysis</h3>
+          <p class="muted">Daily moisture volatility</p>
+        </div>
+      </div>
+      <canvas id="humidityChart"></canvas>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>Wind Tracking</h3>
+          <p class="muted">Peak gusts and sustained wind</p>
+        </div>
+      </div>
+      <canvas id="windChart"></canvas>
+    </div>
+  </section>
+
+  <section class="grid two-col">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>Rainfall Trends</h3>
+          <p class="muted">Precipitation forecast</p>
+        </div>
+      </div>
+      <canvas id="rainChart"></canvas>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>Drought Conditions</h3>
+          <p class="muted">Soil dryness projection</p>
+        </div>
+      </div>
+      <canvas id="droughtChart"></canvas>
+    </div>
+  </section>
+
+  <section class="grid two-col">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>Weather Alert System</h3>
+          <p class="muted">Trigger conditions and response thresholds</p>
+        </div>
+      </div>
+      <div class="alert-list" id="weatherAlerts"></div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>Real-time Update Workflow</h3>
+          <p class="muted">API ingest, normalization, and alert orchestration</p>
+        </div>
+      </div>
+      <div class="workflow-list" id="updateWorkflow"></div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block scripts %}
+  <script src="/static/js/weather.js"></script>
+{% endblock %}

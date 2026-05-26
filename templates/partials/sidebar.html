@@ -1,0 +1,42 @@
+<aside class="sidebar">
+  <div class="brand">
+    <div class="brand-mark">WF</div>
+    <div>
+      <p class="brand-title">Wildfire IQ</p>
+      <p class="brand-subtitle">Intelligence Platform</p>
+    </div>
+  </div>
+  <nav class="nav">
+    <a class="nav-link {{ 'active' if active_page == 'dashboard' else '' }}" href="{{ url_for('dashboard.dashboard') }}">
+      Overview
+    </a>
+    <a class="nav-link {{ 'active' if active_page == 'risk' else '' }}" href="{{ url_for('risk.risk_page') }}">
+      Risk Monitor
+    </a>
+    <a class="nav-link {{ 'active' if active_page == 'analytics' else '' }}" href="{{ url_for('analytics.analytics_page') }}">
+      Analytics
+    </a>
+    <a class="nav-link {{ 'active' if active_page == 'predictions' else '' }}" href="{{ url_for('prediction_page.predictions_page') }}">
+      Predictions
+    </a>
+    <a class="nav-link {{ 'active' if active_page == 'weather' else '' }}" href="{{ url_for('weather_page.weather_page') }}">
+      Weather
+    </a>
+    <a class="nav-link {{ 'active' if active_page == 'alerts' else '' }}" href="{{ url_for('alerts_page.alerts_page') }}">
+      Alerts Center
+    </a>
+    <a class="nav-link {{ 'active' if active_page == 'live_map' else '' }}" href="{{ url_for('map_page.live_map_page') }}">
+      Live Map
+    </a>
+    <a class="nav-link {{ 'active' if active_page == 'historical' else '' }}" href="{{ url_for('historical.historical_page') }}">
+      Historical Data
+    </a>
+    <a class="nav-link {{ 'active' if active_page == 'model_insights' else '' }}" href="{{ url_for('ai_insights.model_insights_page') }}">
+      AI Model Insights
+    </a>
+  </nav>
+  <div class="sidebar-footer">
+    <p class="caption">Status</p>
+    <div class="status-pill">Live data synced</div>
+  </div>
+</aside>

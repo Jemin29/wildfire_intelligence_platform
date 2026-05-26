@@ -1,0 +1,200 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}AI Model Insights & Interpretability{% endblock %}
+
+{% block content %}
+<div class="topbar">
+    <div>
+        <div class="eyebrow">Enterprise Machine Learning</div>
+        <h1>Model Insights & Explainability</h1>
+        <div class="meta-row">
+            <span class="meta-chip status"><i class="fas fa-check-circle"></i> Production Ready</span>
+            <span class="meta-chip"><i class="fas fa-code-branch"></i> Version: v4.2.1-XGB-LSTM</span>
+            <span class="meta-chip"><i class="fas fa-clock"></i> Last Trained: 4 hours ago</span>
+            <span class="meta-chip"><i class="fas fa-microchip"></i> Framework: PyTorch + XGBoost</span>
+        </div>
+    </div>
+    <div class="actions">
+        <button class="ghost-btn"><i class="fas fa-file-download"></i> Export Report</button>
+        <button class="primary-btn"><i class="fas fa-sync-alt"></i> Retrain Model</button>
+    </div>
+</div>
+
+<!-- Model KPIs -->
+<div class="grid four-col">
+    <div class="card kpi-card model-kpi">
+        <div class="card-body">
+            <div class="kpi-label">F1 Score (Macro)</div>
+            <div class="kpi-value">0.942</div>
+            <div class="risk-trend up">+0.015 vs v4.2.0</div>
+        </div>
+    </div>
+    <div class="card kpi-card model-kpi">
+        <div class="card-body">
+            <div class="kpi-label">Recall (Wildfire Positive)</div>
+            <div class="kpi-value">0.965</div>
+            <div class="risk-trend up">+0.021 vs v4.2.0</div>
+        </div>
+    </div>
+    <div class="card kpi-card model-kpi">
+        <div class="card-body">
+            <div class="kpi-label">Inference Time (p95)</div>
+            <div class="kpi-value">12.4ms</div>
+            <div class="risk-trend down">-1.2ms</div>
+        </div>
+    </div>
+    <div class="card kpi-card model-kpi">
+        <div class="card-body">
+            <div class="kpi-label">Active Parameters</div>
+            <div class="kpi-value">8.4M</div>
+            <div class="kpi-subtitle">Optimized Weights</div>
+        </div>
+    </div>
+</div>
+
+<!-- Architecture & Interpretability -->
+<div class="grid two-col" style="margin-top: 24px;">
+    <!-- Feature Importance -->
+    <div class="card chart-card">
+        <div class="card-header">
+            <div>
+                <h3>Global Feature Importance</h3>
+                <p class="eyebrow">XGBoost Gain vs Split</p>
+            </div>
+        </div>
+        <div class="card-body">
+            <canvas id="featureImportanceChart"></canvas>
+        </div>
+    </div>
+
+    <!-- SHAP Values Summary -->
+    <div class="card chart-card">
+        <div class="card-header">
+            <div>
+                <h3>SHAP Value Distribution</h3>
+                <p class="eyebrow">Impact on Model Output</p>
+            </div>
+            <div class="location-picker">
+                <span class="meta-chip">Top 10 Features</span>
+            </div>
+        </div>
+        <div class="card-body">
+            <canvas id="shapSummaryChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<!-- Performance Metrics -->
+<div class="grid two-col" style="margin-top: 24px;">
+    
+    <!-- Confusion Matrix -->
+    <div class="card">
+        <div class="card-header">
+            <div>
+                <h3>Test Set Confusion Matrix</h3>
+                <p class="eyebrow">Holdout Set Performance (N=4,500)</p>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="confusion-matrix-container">
+                <div class="cm-labels-top">
+                    <span class="cm-title">Predicted Class</span>
+                    <div class="cm-cols">
+                        <span>Negative</span>
+                        <span>Positive (Fire)</span>
+                    </div>
+                </div>
+                <div class="cm-grid-wrapper">
+                    <div class="cm-labels-left">
+                        <span class="cm-title rotated">Actual Class</span>
+                        <div class="cm-rows">
+                            <span>Negative</span>
+                            <span>Positive</span>
+                        </div>
+                    </div>
+                    <div class="cm-grid">
+                        <div class="cm-cell true-negative">
+                            <span class="cm-val">3,102</span>
+                            <span class="cm-lbl">True Neg. (TN)</span>
+                        </div>
+                        <div class="cm-cell false-positive">
+                            <span class="cm-val">124</span>
+                            <span class="cm-lbl">False Pos. (FP)</span>
+                        </div>
+                        <div class="cm-cell false-negative">
+                            <span class="cm-val">45</span>
+                            <span class="cm-lbl">False Neg. (FN)</span>
+                        </div>
+                        <div class="cm-cell true-positive">
+                            <span class="cm-val">1,229</span>
+                            <span class="cm-lbl">True Pos. (TP)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="cm-metrics">
+                    <div class="chip">Precision: 90.8%</div>
+                    <div class="chip">Recall: 96.5%</div>
+                    <div class="chip">Specificity: 96.1%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Precision Recall Curve -->
+    <div class="card chart-card">
+        <div class="card-header">
+            <div>
+                <h3>Precision-Recall Curve</h3>
+                <p class="eyebrow">Area Under Curve (PR-AUC) = 0.95</p>
+            </div>
+        </div>
+        <div class="card-body">
+            <canvas id="precisionRecallChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<!-- Architecture Diagram -->
+<div class="card" style="margin-top: 24px;">
+    <div class="card-header">
+        <div>
+            <h3>Ensemble Architecture Flow</h3>
+            <p class="eyebrow">Data Ingestion to Prediction Pathway</p>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="ai-architecture-diagram">
+            <div class="arch-col data-layer">
+                <h4>Data Ingestion</h4>
+                <div class="arch-box">Satellite Imagery (GOES)</div>
+                <div class="arch-box">IoT Sensors (NDVI, Temp)</div>
+                <div class="arch-box">Topographic Maps (DEM)</div>
+            </div>
+            <div class="arch-arrow"><i class="fas fa-chevron-right"></i></div>
+            <div class="arch-col compute-layer">
+                <h4>Feature Extraction</h4>
+                <div class="arch-box">Spatio-Temporal Pipeline</div>
+                <div class="arch-box">Transformer Encoders</div>
+            </div>
+            <div class="arch-arrow"><i class="fas fa-chevron-right"></i></div>
+            <div class="arch-col model-layer">
+                <h4>Ensemble Model</h4>
+                <div class="arch-box primary">XGBoost (Tabular)</div>
+                <div class="arch-box primary">LSTM (Time-Series)</div>
+            </div>
+            <div class="arch-arrow"><i class="fas fa-chevron-right"></i></div>
+            <div class="arch-col output-layer">
+                <h4>Inference</h4>
+                <div class="arch-box critical">Risk Probability (0-1)</div>
+                <div class="arch-box">SHAP Explanations</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="module" src="{{ url_for('static', filename='js/model_insights.js') }}"></script>
+{% endblock %}

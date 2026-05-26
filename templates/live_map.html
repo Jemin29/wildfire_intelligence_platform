@@ -1,0 +1,130 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Live Wildfire Map{% endblock %}
+
+{% block content %}
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Live Wildfire Map</p>
+      <h1>Operational Geospatial Intelligence</h1>
+      <div class="meta-row">
+        <span class="meta-chip" id="mapRegionLabel">Western United States</span>
+        <span class="meta-chip" id="mapSyncStatus">Telemetry: Live</span>
+        <span class="meta-chip" id="mapLastUpdated">Last sync --</span>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="ghost-btn" id="toggleFullscreen">Fullscreen</button>
+      <button class="ghost-btn">Export Layers</button>
+      <button class="primary-btn">Dispatch Plan</button>
+    </div>
+  </header>
+
+  <section class="map-shell fullscreen" id="mapShell">
+    <div class="map-controls">
+      <div class="card control-card">
+        <div class="card-header">
+          <div>
+            <h3>Region Filter</h3>
+            <p class="muted">Focus areas of interest</p>
+          </div>
+        </div>
+        <div class="filter-group">
+          <label class="filter-chip">
+            <input type="checkbox" checked data-region="Sierra Corridor" />
+            Sierra Corridor
+          </label>
+          <label class="filter-chip">
+            <input type="checkbox" checked data-region="Central Basin" />
+            Central Basin
+          </label>
+          <label class="filter-chip">
+            <input type="checkbox" data-region="Coastal Ridge" />
+            Coastal Ridge
+          </label>
+          <label class="filter-chip">
+            <input type="checkbox" data-region="Desert Edge" />
+            Desert Edge
+          </label>
+        </div>
+      </div>
+
+      <div class="card control-card">
+        <div class="card-header">
+          <div>
+            <h3>Timeline</h3>
+            <p class="muted">Historical to live</p>
+          </div>
+        </div>
+        <input id="timelineSlider" type="range" min="0" max="24" value="12" />
+        <div class="timeline-labels">
+          <span>24h ago</span>
+          <span id="timelineValue">12h</span>
+          <span>Now</span>
+        </div>
+        <div class="map-timeline" id="timelineSummary">
+          <strong>Operational window</strong>
+          <span class="muted">Filtering incidents and heat signatures</span>
+        </div>
+      </div>
+
+      <div class="card control-card">
+        <div class="card-header">
+          <div>
+            <h3>Layer Stack</h3>
+            <p class="muted">Intelligence overlays</p>
+          </div>
+        </div>
+        <div class="layer-list" id="layerControls">
+          <label><input type="checkbox" checked data-layer="heat" /> Wildfire heatmap</label>
+          <label><input type="checkbox" checked data-layer="markers" /> Live markers</label>
+          <label><input type="checkbox" checked data-layer="zones" /> Danger zones</label>
+          <label><input type="checkbox" data-layer="satellite" /> Satellite overlay</label>
+          <label><input type="checkbox" data-layer="weather" /> Weather overlay</label>
+        </div>
+      </div>
+
+      <div class="card control-card">
+        <div class="card-header">
+          <div>
+            <h3>Operational Intelligence</h3>
+            <p class="muted">Active response overlays</p>
+          </div>
+        </div>
+        <div class="intel-list" id="intelOverlays"></div>
+      </div>
+    </div>
+
+    <div class="map-panel map-panel-full">
+      <iframe
+        class="folium-frame map-full"
+        title="Live wildfire map"
+        src="/map/wildfire?heat=1&markers=1&zones=1&satellite=0&weather=0"
+        loading="lazy"
+        id="mapFrame"
+      ></iframe>
+
+      <div class="map-overlay">
+        <div class="overlay-card">
+          <p class="caption">Live activity</p>
+          <h3 id="incidentCount">12 active incidents</h3>
+          <p class="muted" id="highestRisk">Highest risk: Sierra Corridor</p>
+        </div>
+        <div class="overlay-card">
+          <p class="caption">Weather alert</p>
+          <h3 id="weatherAlert">Wind surge advisory</h3>
+          <p class="muted" id="weatherAlertMeta">Gusts 8.1 m/s</p>
+        </div>
+        <div class="overlay-card">
+          <p class="caption">Response posture</p>
+          <h3 id="responsePosture">Elevated readiness</h3>
+          <p class="muted" id="responseMeta">Resources staged: 18 units</p>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block scripts %}
+  <script src="/static/js/live_map.js"></script>
+{% endblock %}
