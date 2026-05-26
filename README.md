@@ -90,7 +90,7 @@ Base URL: `http://localhost:5000`
 | /api/alerts | GET | Active alerts |
 
 ## Deployment
-
+Website is live at: https://wildfire-intelligence-platform.onrender.com/
 See [docs/deployment.md](docs/deployment.md) and [docs/render.md](docs/render.md) for Render/Vercel workflows. Docker instructions are in [docs/docker.md](docs/docker.md).
 
 ## Screenshots
