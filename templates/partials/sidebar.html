@@ -7,6 +7,9 @@
     </div>
   </div>
   <nav class="nav">
+    <a class="nav-link" href="{{ url_for('landing.home') }}">
+      Home
+    </a>
     <a class="nav-link {{ 'active' if active_page == 'dashboard' else '' }}" href="{{ url_for('dashboard.dashboard') }}">
       Overview
     </a>

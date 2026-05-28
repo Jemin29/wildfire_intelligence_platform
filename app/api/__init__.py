@@ -11,6 +11,7 @@ from app.api.dashboard_routes import dashboard_bp
 from app.api.health_routes import health_bp
 from app.api.historical_api_routes import historical_api_bp
 from app.api.historical_routes import historical_bp
+from app.api.landing_routes import landing_bp
 from app.api.map_routes import map_bp, map_page_bp
 from app.api.prediction_routes import prediction_bp, prediction_page_bp
 from app.api.report_api_routes import report_api_bp
@@ -19,6 +20,7 @@ from app.api.weather_routes import weather_bp, weather_page_bp
 
 
 def register_blueprints(app: Flask) -> None:
+    app.register_blueprint(landing_bp)
     app.register_blueprint(alert_bp)
     app.register_blueprint(alert_api_bp)
     app.register_blueprint(alerts_page_bp)

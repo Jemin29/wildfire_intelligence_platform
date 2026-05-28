@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}AI-Powered Wildfire Intelligence Platform{% endblock %}</title>
+    <meta
+      name="description"
+      content="AI-powered wildfire intelligence with predictive modeling, live risk mapping, and operational analytics."
+    />
+    <meta property="og:title" content="AI-Powered Wildfire Intelligence Platform" />
+    <meta
+      property="og:description"
+      content="Predict, monitor, and respond to wildfire risk with real-time intelligence and AI insights."
+    />
+    <meta property="og:type" content="website" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/css/landing.css" />
+    {% block extra_head %}{% endblock %}
+  </head>
+  <body class="landing">
+    <header class="site-header">
+      <nav class="nav-bar">
+        <a class="logo" href="{{ url_for('landing.home') }}">
+          <span class="logo-mark">AI</span>
+          <span class="logo-text">
+            <span>Wildfire Intelligence</span>
+            <small>Operational Decision Platform</small>
+          </span>
+        </a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navMenu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <div id="navMenu" class="nav-menu">
+          <a href="#overview">Platform</a>
+          <a href="#workflow">Workflow</a>
+          <a href="#features">Features</a>
+          <a href="#analytics">Analytics</a>
+          <a href="#architecture">Architecture</a>
+          <a href="#use-cases">Use Cases</a>
+          <a class="nav-link" href="{{ url_for('dashboard.dashboard') }}">Explore Platform</a>
+          <a class="nav-cta" href="#cta">Request a Demo</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-content">
+        <div>
+          <h4>Wildfire Intelligence Platform</h4>
+          <p>
+            AI-powered situational awareness for wildfire prediction, monitoring, and operational response.
+          </p>
+        </div>
+        <div class="footer-links">
+          <a href="{{ url_for('dashboard.dashboard') }}">Dashboard</a>
+          <a href="{{ url_for('map_page.live_map_page') }}">Live Map</a>
+          <a href="{{ url_for('analytics.analytics_page') }}">Analytics</a>
+          <a href="{{ url_for('ai_insights.model_insights_page') }}">AI Insights</a>
+        </div>
+        <div class="footer-meta">
+          <span>Built for enterprise wildfire operations</span>
+          <span>© 2026 Wildfire Intelligence</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/static/js/landing.js"></script>
+    {% block scripts %}{% endblock %}
+  </body>
+</html>

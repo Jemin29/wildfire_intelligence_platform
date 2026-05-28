@@ -1,0 +1,352 @@
+{% extends "layouts/landing_base.html" %}
+
+{% block title %}AI-Powered Wildfire Intelligence Platform{% endblock %}
+
+{% block content %}
+  <section class="hero" id="hero">
+    <div class="hero-content" data-reveal>
+      <p class="eyebrow">AI-Powered Wildfire Intelligence Platform</p>
+      <h1>Predict. Monitor. Respond with real-time wildfire intelligence.</h1>
+      <p class="hero-subtitle">
+        Fuse machine learning, live satellite signals, and operational analytics into a single command
+        center built for high-stakes response teams.
+      </p>
+      <div class="hero-actions">
+        <a class="btn primary" href="{{ url_for('dashboard.dashboard') }}">Explore Platform</a>
+        <a class="btn ghost" href="#cta">Schedule a Demo</a>
+      </div>
+      <div class="hero-meta">
+        <div>
+          <strong>98.7%</strong>
+          <span>Model confidence</span>
+        </div>
+        <div>
+          <strong>2.4M</strong>
+          <span>Signals processed daily</span>
+        </div>
+        <div>
+          <strong>40+</strong>
+          <span>Operational integrations</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual" data-reveal>
+      <div class="brand-orbit">
+        <div class="brand-core">
+          <div class="brand-pulse"></div>
+        </div>
+        <div class="brand-ring"></div>
+        <div class="brand-ring alt"></div>
+      </div>
+      <div class="signal-grid">
+        <div class="signal-card">
+          <p>Live Risk Index</p>
+          <h3>82</h3>
+          <span>Extreme</span>
+        </div>
+        <div class="signal-card">
+          <p>Active Alerts</p>
+          <h3>41</h3>
+          <span>Auto-prioritized</span>
+        </div>
+        <div class="signal-card">
+          <p>Weather Delta</p>
+          <h3>+14%</h3>
+          <span>Next 12 hrs</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats" id="stats">
+    <div class="stat-card" data-reveal>
+      <p>Prediction latency</p>
+      <h3><span data-count="320">0</span>ms</h3>
+    </div>
+    <div class="stat-card" data-reveal>
+      <p>Regions monitored</p>
+      <h3><span data-count="128">0</span></h3>
+    </div>
+    <div class="stat-card" data-reveal>
+      <p>Live sensor uptime</p>
+      <h3><span data-count="99">0</span>%</h3>
+    </div>
+    <div class="stat-card" data-reveal>
+      <p>Operational alerts</p>
+      <h3><span data-count="1460">0</span></h3>
+    </div>
+  </section>
+
+  <section class="overview" id="overview">
+    <div class="section-heading" data-reveal>
+      <p class="eyebrow">Platform Overview</p>
+      <h2>Unified command intelligence for wildfire operations.</h2>
+      <p>
+        The platform connects prediction, response, and operational planning across every wildfire
+        lifecycle stage. Built on Flask, PostgreSQL, and enterprise ML pipelines.
+      </p>
+    </div>
+    <div class="overview-grid">
+      <div class="overview-card" data-reveal>
+        <h3>AI Prediction Engine</h3>
+        <p>Multi-signal modeling with explainability layers and continuous learning loops.</p>
+      </div>
+      <div class="overview-card" data-reveal>
+        <h3>Operational Dashboards</h3>
+        <p>Actionable dashboards for risk, analytics, alerts, and strategic planning.</p>
+      </div>
+      <div class="overview-card" data-reveal>
+        <h3>Live Map Intelligence</h3>
+        <p>Heatmaps, perimeters, and sensor overlays synced to real-time telemetry.</p>
+      </div>
+      <div class="overview-card" data-reveal>
+        <h3>Weather Intelligence</h3>
+        <p>Forecast-driven response modeling with micro-climate awareness.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="workflow" id="workflow">
+    <div class="section-heading" data-reveal>
+      <p class="eyebrow">AI Prediction Workflow</p>
+      <h2>From raw signals to operational-ready decisions.</h2>
+      <p>Automated inference pipelines translate sensor data into human-ready recommendations.</p>
+    </div>
+    <div class="workflow-steps">
+      <div class="step" data-reveal>
+        <span>01</span>
+        <h3>Ingest Signals</h3>
+        <p>Weather, satellite, vegetation, and incident data streams are normalized in seconds.</p>
+      </div>
+      <div class="step" data-reveal>
+        <span>02</span>
+        <h3>Predict Risk</h3>
+        <p>ML ensembles score risk and uncertainty with explainability features.</p>
+      </div>
+      <div class="step" data-reveal>
+        <span>03</span>
+        <h3>Activate Alerts</h3>
+        <p>Alert center prioritizes critical zones and suggests response playbooks.</p>
+      </div>
+      <div class="step" data-reveal>
+        <span>04</span>
+        <h3>Coordinate Response</h3>
+        <p>Dashboards and live maps guide field teams and executive command.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <div class="section-heading" data-reveal>
+      <p class="eyebrow">Wildfire Intelligence Features</p>
+      <h2>Everything you need to stay ahead of wildfire escalation.</h2>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card" data-reveal>
+        <h3>Alert Orchestration</h3>
+        <p>Multi-channel alerts tied to AI risk thresholds and response SLAs.</p>
+      </div>
+      <div class="feature-card" data-reveal>
+        <h3>Historical Analytics</h3>
+        <p>Back-test risk scenarios and optimize operational preparedness.</p>
+      </div>
+      <div class="feature-card" data-reveal>
+        <h3>AI Insights</h3>
+        <p>Explainability dashboards highlight model drivers and uncertainty bands.</p>
+      </div>
+      <div class="feature-card" data-reveal>
+        <h3>Geo-Fenced Risk Zones</h3>
+        <p>Dynamic zones updated continuously by live telemetry.</p>
+      </div>
+      <div class="feature-card" data-reveal>
+        <h3>Mission Control Integrations</h3>
+        <p>Connect to GIS, EOC workflows, and emergency notification systems.</p>
+      </div>
+      <div class="feature-card" data-reveal>
+        <h3>Compliance Reporting</h3>
+        <p>Generate audit-ready intelligence reports for regulatory reporting.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="monitoring" id="monitoring">
+    <div class="section-heading" data-reveal>
+      <p class="eyebrow">Real-Time Monitoring</p>
+      <h2>Live intelligence across risk, weather, and operations.</h2>
+    </div>
+    <div class="monitoring-grid">
+      <div class="monitoring-card" data-reveal>
+        <h3>Risk Command Center</h3>
+        <p>Continuous scoring with AI anomaly detection and drift monitoring.</p>
+        <a href="{{ url_for('risk.risk_page') }}">Open Risk Monitor</a>
+      </div>
+      <div class="monitoring-card" data-reveal>
+        <h3>Alerts Center</h3>
+        <p>Prioritized alerts with severity tiers and responder routing.</p>
+        <a href="{{ url_for('alerts_page.alerts_page') }}">Open Alerts</a>
+      </div>
+      <div class="monitoring-card" data-reveal>
+        <h3>Operational Readiness</h3>
+        <p>Live availability of crews, assets, and coverage.</p>
+        <a href="{{ url_for('dashboard.dashboard') }}">Open Operations</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="analytics" id="analytics">
+    <div class="section-heading" data-reveal>
+      <p class="eyebrow">Interactive Analytics Showcase</p>
+      <h2>Executive-ready analytics without leaving the platform.</h2>
+    </div>
+    <div class="analytics-grid">
+      <div class="analytics-card" data-reveal>
+        <div class="chart-preview">
+          <div class="spark-line"></div>
+        </div>
+        <h3>Risk Forecast Trends</h3>
+        <p>14-day predictive outlook with confidence intervals.</p>
+      </div>
+      <div class="analytics-card" data-reveal>
+        <div class="chart-preview">
+          <div class="bar-stack"></div>
+        </div>
+        <h3>Alert Volume</h3>
+        <p>Escalation rates mapped to response readiness.</p>
+      </div>
+      <div class="analytics-card" data-reveal>
+        <div class="chart-preview">
+          <div class="radial-gauge"></div>
+        </div>
+        <h3>Mission Coverage</h3>
+        <p>Resource distribution by terrain, region, and threat.</p>
+      </div>
+    </div>
+    <div class="dashboard-previews" data-reveal>
+      <div class="preview-card">
+        <h4>Dashboard Overview</h4>
+        <p>Strategic snapshot of national risk posture.</p>
+        <a href="{{ url_for('dashboard.dashboard') }}">View Dashboard</a>
+      </div>
+      <div class="preview-card">
+        <h4>Analytics Studio</h4>
+        <p>Historical insights and operational KPI tracking.</p>
+        <a href="{{ url_for('analytics.analytics_page') }}">View Analytics</a>
+      </div>
+      <div class="preview-card">
+        <h4>Predictions Console</h4>
+        <p>Run scenarios and share AI-driven recommendations.</p>
+        <a href="{{ url_for('prediction_page.predictions_page') }}">View Predictions</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="intelligence" id="intelligence">
+    <div class="section-heading" data-reveal>
+      <p class="eyebrow">Wildfire Intelligence</p>
+      <h2>Explainable AI built for real-world wildfire response.</h2>
+    </div>
+    <div class="intelligence-grid">
+      <div class="intelligence-card" data-reveal>
+        <h3>Weather Intelligence</h3>
+        <p>Micro-climate predictions and wind corridor analysis.</p>
+        <a href="{{ url_for('weather_page.weather_page') }}">View Weather</a>
+      </div>
+      <div class="intelligence-card" data-reveal>
+        <h3>Live Risk Mapping</h3>
+        <p>Heatmaps, perimeters, and satellite overlays updated continuously.</p>
+        <a href="{{ url_for('map_page.live_map_page') }}">Open Live Map</a>
+      </div>
+      <div class="intelligence-card" data-reveal>
+        <h3>AI Insights</h3>
+        <p>Model explainability, feature drivers, and scenario narratives.</p>
+        <a href="{{ url_for('ai_insights.model_insights_page') }}">View AI Insights</a>
+      </div>
+      <div class="intelligence-card" data-reveal>
+        <h3>Historical Analytics</h3>
+        <p>Analyze previous seasons and optimize resource planning.</p>
+        <a href="{{ url_for('historical.historical_page') }}">View Historical</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="architecture" id="architecture">
+    <div class="section-heading" data-reveal>
+      <p class="eyebrow">Deployment-Ready Architecture</p>
+      <h2>Enterprise infrastructure built for scale and resilience.</h2>
+      <p>Flask services orchestrated with PostgreSQL and ML pipelines for production readiness.</p>
+    </div>
+    <div class="architecture-grid">
+      <div class="architecture-card" data-reveal>
+        <h3>Data Ingestion</h3>
+        <p>Live APIs, satellite feeds, and sensor networks normalized in real time.</p>
+      </div>
+      <div class="architecture-card" data-reveal>
+        <h3>ML Prediction Layer</h3>
+        <p>Model inference with feature validation, drift detection, and audit logs.</p>
+      </div>
+      <div class="architecture-card" data-reveal>
+        <h3>Operational Services</h3>
+        <p>Risk, alerts, and analytics services exposed via Flask blueprints.</p>
+      </div>
+      <div class="architecture-card" data-reveal>
+        <h3>Secure Data Store</h3>
+        <p>PostgreSQL-backed telemetry, forecasts, and decision history.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="operations" id="operations">
+    <div class="section-heading" data-reveal>
+      <p class="eyebrow">Operational Intelligence</p>
+      <h2>Coordinate resources with confidence.</h2>
+    </div>
+    <div class="operations-grid">
+      <div class="operations-card" data-reveal>
+        <h3>Incident Response</h3>
+        <p>Automated resource routing based on AI risk predictions.</p>
+      </div>
+      <div class="operations-card" data-reveal>
+        <h3>Executive Reporting</h3>
+        <p>Share mission-ready reports with leadership and stakeholders.</p>
+      </div>
+      <div class="operations-card" data-reveal>
+        <h3>Collaborative Command</h3>
+        <p>Cross-team visibility across regional response centers.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="use-cases" id="use-cases">
+    <div class="section-heading" data-reveal>
+      <p class="eyebrow">Testimonials / Use Cases</p>
+      <h2>Trusted by wildfire response leaders.</h2>
+    </div>
+    <div class="use-case-grid">
+      <div class="use-case" data-reveal>
+        <p>"We reduced escalation response time by 38% using AI-driven risk alerts."</p>
+        <span>State Emergency Command</span>
+      </div>
+      <div class="use-case" data-reveal>
+        <p>"The platform gave us visibility into weather-driven risk shifts across regions."</p>
+        <span>Wildland Operations Director</span>
+      </div>
+      <div class="use-case" data-reveal>
+        <p>"Predictive analytics improved staffing allocation and resource deployment."</p>
+        <span>National Fire Agency</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" id="cta">
+    <div class="cta-content" data-reveal>
+      <h2>Move faster with AI wildfire intelligence.</h2>
+      <p>
+        Launch the platform as your new command center for wildfire prediction and response.
+      </p>
+      <div class="cta-actions">
+        <a class="btn primary" href="{{ url_for('dashboard.dashboard') }}">Explore Platform</a>
+        <a class="btn ghost" href="{{ url_for('prediction_page.predictions_page') }}">Run Predictions</a>
+      </div>
+    </div>
+  </section>
+{% endblock %}
